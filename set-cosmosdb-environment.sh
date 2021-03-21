@@ -8,13 +8,19 @@ then
     echo
 else
     echo "Setting Cosmos DB environment for Cassandra API..."
-    DOCUMENT_ENDPOINT=$(az cosmosdb show --resource-group "${RESOURCE_GROUP}" --name "${RESOURCE_GROUP}" --query documentEndpoint --output tsv)
-    PRIMARY_MASTER_KEY=$(az cosmosdb keys list --resource-group "${RESOURCE_GROUP}" --name "${RESOURCE_GROUP}" --query primaryMasterKey --output tsv)
-    export DOCUMENT_ENDPOINT
-    export PRIMARY_MASTER_KEY
+
+    DB_HOSTNAME="${RESOURCE_GROUP}.cassandra.cosmos.azure.com"
+    DB_USERNAME="${RESOURCE_GROUP}"
+    DB_PASSWORD=$(az cosmosdb keys list --resource-group "${RESOURCE_GROUP}" --name "${RESOURCE_GROUP}" --query primaryMasterKey --output tsv)
+
+    export DB_HOSTNAME
+    export DB_USERNAME
+    export DB_PASSWORD
+
     echo "Environment set successfully!"
     echo
-    echo "    DOCUMENT_ENDPOINT  = ${DOCUMENT_ENDPOINT}"
-    echo "    PRIMARY_MASTER_KEY = ${PRIMARY_MASTER_KEY}"
+    echo "    DB_HOSTNAME = ${DB_HOSTNAME}"
+    echo "    DB_USERNAME = ${DB_USERNAME}"
+    echo "    DB_PASSWORD = ${DB_PASSWORD}"
     echo
 fi
