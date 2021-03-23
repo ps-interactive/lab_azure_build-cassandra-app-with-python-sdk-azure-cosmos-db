@@ -25,5 +25,5 @@ fake = Faker()
 for record_id in range(3000):
     record = {'id': record_id}
     record.update(fake.profile(fields=keys))
-    session.execute("INSERT INTO uprofile.withuuidv44 JSON '{}'".format(json.dumps(record).replace("'", "")))
+    session.execute("INSERT INTO customers.records JSON '{}'".format(json.dumps(record).replace("'", "")))
     print(json.dumps(record).replace("'", ""))
