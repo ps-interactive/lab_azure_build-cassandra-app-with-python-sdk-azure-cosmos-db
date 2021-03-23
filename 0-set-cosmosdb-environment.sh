@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+RESOURCE_GROUP=$(az group list --query "[?contains(name, 'azure')].name" --output tsv)
+
 if [ -z "${RESOURCE_GROUP}" ];
 then
     echo "Please manually set the RESOURCE_GROUP environment variable:"
