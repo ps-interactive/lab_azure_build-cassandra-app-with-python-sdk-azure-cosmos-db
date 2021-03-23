@@ -13,3 +13,13 @@ requirements:
 config:
 	$(PYTHON) ./config.py
 
+connection:
+	$(PYTHON) ./1-test-connection.py
+
+keyspace:
+	$(PYTHON) ./2-create-keyspace-and-table.py
+
+data:
+	$(PYTHON) ./3-generate-data.py
+
+all: connection keyspace data
