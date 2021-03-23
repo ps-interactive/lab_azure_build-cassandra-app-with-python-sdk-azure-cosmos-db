@@ -3,7 +3,8 @@ RESOURCE_GROUP=$(az group list --query "[?contains(name, 'azure-lab')].name" --o
 
 if [ -z "${RESOURCE_GROUP}" ];
 then
-    echo "Please manually set the RESOURCE_GROUP environment variable:"
+    echo "Please manually set the RESOURCE_GROUP environment variable and rerun this script."
+    echo
     echo "For example:"
     echo
     echo "export RESOURCE_GROUP=YOUR_RESOURCE_GROUP_NAME_HERE"
