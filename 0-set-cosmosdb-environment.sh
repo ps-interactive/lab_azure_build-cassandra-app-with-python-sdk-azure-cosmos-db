@@ -9,9 +9,10 @@ then
     echo "       Please manually set the RESOURCE_GROUP environment"
     echo "       variable and rerun this script."
     echo
-    echo "For example:"
+    echo "       For example:"
     echo
-    echo "export RESOURCE_GROUP=YOUR_RESOURCE_GROUP_NAME_HERE"
+    echo "       export RESOURCE_GROUP=YOUR_RESOURCE_GROUP_NAME_HERE"
+    echo "       source ./0-set-cosmosdb-environment.sh"
     echo
 else
     echo "Setting Cosmos DB environment for Cassandra API..."
