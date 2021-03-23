@@ -12,7 +12,7 @@ cluster = Cluster([cfg.config['contactPoint']], port=cfg.config['port'], auth_pr
 
 try:
     session = cluster.connect()
-    print("Connection was successful!")
+    print("Connection test was successful!")
 except:
     print("ERROR: Connection was not established.")
     print("Please review the environment variables with the following commands:")
