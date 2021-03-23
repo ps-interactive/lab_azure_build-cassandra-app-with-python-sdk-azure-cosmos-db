@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-RESOURCE_GROUP=$(az group list --query "[?contains(name, 'azure')].name" --output tsv)
+RESOURCE_GROUP=$(az group list --query "[?contains(name, 'azure-lab')].name" --output tsv)
 
 if [ -z "${RESOURCE_GROUP}" ];
 then
