@@ -19,3 +19,6 @@ session.execute('CREATE KEYSPACE IF NOT EXISTS customers WITH replication = {\'c
 
 print("\nCreating Table 'records' ...")
 session.execute('CREATE TABLE IF NOT EXISTS customers.records (id int, job text, company text, ssn text, residence text, blood_group text, username text, name text, sex text, address text, mail text, PRIMARY KEY ((sex), blood_group, residence))')
+
+print("\nCreating Table 'blood_groups' ...")
+session.execute('CREATE TABLE IF NOT EXISTS customers.blood_groups (id int, job text, company text, ssn text, residence text, blood_group text, username text, name text, sex text, address text, mail text, PRIMARY KEY ((blood_group), sex, residence))')

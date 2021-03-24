@@ -1,9 +1,16 @@
 #!/usr/bin/env python
-'''Create the keyspace and table'''
+'''Count records by blood group'''
 from cassandra.auth import PlainTextAuthProvider
+from prettytable import PrettyTable
 from cassandra.cluster import Cluster
 from ssl import PROTOCOL_TLSv1_2, SSLContext, CERT_NONE
 import config as cfg
+
+def PrintTable(rows, keys):
+    t = PrettyTable(['ID', 'Name', 'Sex', 'Blood Group', 'SSN'])
+    for r in rows:
+        t.add_row([r.id, r.name, r.sex, r.blood_group, r.ssn])
+    print(t)
 
 
 keys = ['id', 'address', 'blood_group', 'company', 'job', 'mail', 'name', 'residence', 'sex', 'ssn', 'username']
@@ -14,7 +21,16 @@ auth_provider = PlainTextAuthProvider(username=cfg.config['username'], password=
 cluster = Cluster([cfg.config['contactPoint']], port=cfg.config['port'], auth_provider=auth_provider, ssl_context=ssl_context)
 session = cluster.connect()
 
-session.execute('CREATE KEYSPACE IF NOT EXISTS customers WITH replication = {\'class\': \'NetworkTopologyStrategy\', \'datacenter\' : \'1\' }')
-session.execute('CREATE TABLE IF NOT EXISTS customers.records (id int PRIMARY KEY, job text, company text, ssn text, residence text, blood_group text, username text, name text, sex text, address text, mail text)')
+records = {}
+blood_groups = ['A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-']
 
-print(session.execute('SELECT COUNT(*) FROM customers.records;').one())
+print("Counting records by blood group ...")
+
+for group in blood_groups:
+    count = session.execute("SELECT COUNT(*) FROM customers.records WHERE blood_group = '{}'".format(group)).one()
+    records[group] = count.system_count
+
+t = PrettyTable(blood_groups)
+t.add_row(records)
+print(t)
+
