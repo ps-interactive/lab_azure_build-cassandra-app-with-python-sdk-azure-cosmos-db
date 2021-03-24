@@ -14,10 +14,7 @@ auth_provider = PlainTextAuthProvider(username=cfg.config['username'], password=
 cluster = Cluster([cfg.config['contactPoint']], port=cfg.config['port'], auth_provider=auth_provider, ssl_context=ssl_context)
 session = cluster.connect()
 
-print("\nCreating Keyspace")
 session.execute('CREATE KEYSPACE IF NOT EXISTS customers WITH replication = {\'class\': \'NetworkTopologyStrategy\', \'datacenter\' : \'1\' }')
-
-print("\nCreating Table")
 session.execute('CREATE TABLE IF NOT EXISTS customers.records (id int PRIMARY KEY, job text, company text, ssn text, residence text, blood_group text, username text, name text, sex text, address text, mail text)')
 
 print("\nGenerating Data...")
