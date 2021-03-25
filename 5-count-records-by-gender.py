@@ -17,11 +17,11 @@ sexes = ['M', 'F']
 
 print("Counting records by gender ...")
 
-total = session.execute("SELECT COUNT(*) FROM customers.records").one()
+total = session.execute("SELECT COUNT(*) FROM customers.gender").one()
 t = PrettyTable(['Male', 'Female', 'Total'])
 
 for sex in sexes:
-    count = session.execute("SELECT COUNT(*) FROM customers.records WHERE sex = '{}'".format(sex)).one()
+    count = session.execute("SELECT COUNT(*) FROM customers.gender WHERE sex = '{}'".format(sex)).one()
     report[sex] = count.system_count
 
 t.add_row([report['M'], report['F'], total.system_count])
