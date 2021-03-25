@@ -17,8 +17,11 @@ session = cluster.connect()
 print("\nCreating Keyspace 'customers' ...")
 session.execute('CREATE KEYSPACE IF NOT EXISTS customers WITH replication = {\'class\': \'NetworkTopologyStrategy\', \'datacenter\' : \'1\' }')
 
-print("\nCreating Table 'records' ...")
-session.execute('CREATE TABLE IF NOT EXISTS customers.records (id int, job text, company text, ssn text, residence text, blood_group text, username text, name text, sex text, address text, mail text, PRIMARY KEY ((sex), blood_group, residence))')
+print("\nCreating Table 'records' with PRIMARY KEY (id) ...")
+session.execute('CREATE TABLE IF NOT EXISTS customers.records (id int, job text, company text, ssn text, residence text, blood_group text, username text, name text, sex text, address text, mail text, PRIMARY KEY (id))')
 
-print("\nCreating Table 'blood_groups' ...")
+print("\nCreating Table 'gender' with PRIMARY KEY (sex) ...")
+session.execute('CREATE TABLE IF NOT EXISTS customers.gender (id int, job text, company text, ssn text, residence text, blood_group text, username text, name text, sex text, address text, mail text, PRIMARY KEY ((sex), blood_group, residence))')
+
+print("\nCreating Table 'blood_groups' with PRIMARY KEY (blood_group) ...")
 session.execute('CREATE TABLE IF NOT EXISTS customers.blood_groups (id int, job text, company text, ssn text, residence text, blood_group text, username text, name text, sex text, address text, mail text, PRIMARY KEY ((blood_group), sex, residence))')

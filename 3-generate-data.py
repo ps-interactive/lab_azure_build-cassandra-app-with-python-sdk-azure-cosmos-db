@@ -14,13 +14,12 @@ auth_provider = PlainTextAuthProvider(username=cfg.config['username'], password=
 cluster = Cluster([cfg.config['contactPoint']], port=cfg.config['port'], auth_provider=auth_provider, ssl_context=ssl_context)
 session = cluster.connect()
 
-session.execute('CREATE KEYSPACE IF NOT EXISTS customers WITH replication = {\'class\': \'NetworkTopologyStrategy\', \'datacenter\' : \'1\' }')
-session.execute('CREATE TABLE IF NOT EXISTS customers.records (id int PRIMARY KEY, job text, company text, ssn text, residence text, blood_group text, username text, name text, sex text, address text, mail text)')
-
 print("\nGenerating Data...")
 fake = Faker()
 for record_id in range(3000):
     record = {'id': record_id}
     record.update(fake.profile(fields=keys))
     session.execute("INSERT INTO customers.records JSON '{}'".format(json.dumps(record).replace("'", "")))
+    session.execute("INSERT INTO customers.gender JSON '{}'".format(json.dumps(record).replace("'", "")))
+    session.execute("INSERT INTO customers.blood_group JSON '{}'".format(json.dumps(record).replace("'", "")))
     print(json.dumps(record).replace("'", ""))
