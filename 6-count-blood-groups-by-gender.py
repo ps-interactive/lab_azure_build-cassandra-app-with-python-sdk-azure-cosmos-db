@@ -22,9 +22,6 @@ auth_provider = PlainTextAuthProvider(username=cfg.config['username'], password=
 cluster = Cluster([cfg.config['contactPoint']], port=cfg.config['port'], auth_provider=auth_provider, ssl_context=ssl_context)
 session = cluster.connect()
 
-#session.execute('CREATE KEYSPACE IF NOT EXISTS customers WITH replication = {\'class\': \'NetworkTopologyStrategy\', \'datacenter\' : \'1\' }')
-#session.execute('CREATE TABLE IF NOT EXISTS customers.records (id int PRIMARY KEY, job text, company text, ssn text, residence text, blood_group text, username text, name text, sex text, address text, mail text)')
-
 blood_groups = ['A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-']
 sexes        = ['M','F']
 
@@ -33,8 +30,8 @@ print("Testing blood group queries....")
 for group in blood_groups:
     for sex in sexes:
         print("Blood_Group = '{1}'; Sex = '{0}'".format(sex, group))
-        count = session.execute("SELECT COUNT(*) FROM customers.records WHERE sex = '{}' and  blood_group = '{}'".format(sex, group)).one()
-        rows = session.execute("SELECT * FROM customers.records WHERE sex = '{}' and  blood_group = '{}' LIMIT 5".format(sex, group))
+        count = session.execute("SELECT COUNT(*) FROM customers.gender WHERE sex = '{}' and  blood_group = '{}'".format(sex, group)).one()
+        rows = session.execute("SELECT * FROM customers.gender WHERE sex = '{}' and  blood_group = '{}' LIMIT 5".format(sex, group))
         print("Records found: {}".format(count.system_count))
         PrintTable(rows, keys)
         print()
