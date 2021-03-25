@@ -27,7 +27,7 @@ blood_groups = ['A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-']
 print("Counting records by blood group ...")
 
 for group in blood_groups:
-    count = session.execute("SELECT COUNT(*) FROM customers.records WHERE blood_group = '{}'".format(group)).one()
+    count = session.execute("SELECT COUNT(*) FROM customers.blood_group WHERE blood_group = '{}'".format(group)).one()
     records[group] = count.system_count
 
 t = PrettyTable(blood_groups)
