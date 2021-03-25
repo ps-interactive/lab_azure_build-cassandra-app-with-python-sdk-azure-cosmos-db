@@ -30,8 +30,8 @@ print("Testing blood group queries....")
 for group in blood_groups:
     for sex in sexes:
         print("Blood_Group = '{1}'; Sex = '{0}'".format(sex, group))
-        count = session.execute("SELECT COUNT(*) FROM customers.gender WHERE sex = '{}' and  blood_group = '{}'".format(sex, group)).one()
-        rows = session.execute("SELECT * FROM customers.gender WHERE sex = '{}' and  blood_group = '{}' LIMIT 5".format(sex, group))
+        count = session.execute("SELECT COUNT(*) FROM candidates.gender WHERE sex = '{}' and  blood_group = '{}'".format(sex, group)).one()
+        rows = session.execute("SELECT * FROM candidates.gender WHERE sex = '{}' and  blood_group = '{}' LIMIT 5".format(sex, group))
         print("Records found: {}".format(count.system_count))
         PrintTable(rows, keys)
         print()

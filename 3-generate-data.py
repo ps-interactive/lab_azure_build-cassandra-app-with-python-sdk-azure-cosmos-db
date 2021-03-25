@@ -19,7 +19,7 @@ fake = Faker()
 for record_id in range(3000):
     record = {'id': record_id}
     record.update(fake.profile(fields=keys))
-    session.execute("INSERT INTO customers.records JSON '{}'".format(json.dumps(record).replace("'", "")))
-    session.execute("INSERT INTO customers.gender JSON '{}'".format(json.dumps(record).replace("'", "")))
-    session.execute("INSERT INTO customers.blood_group JSON '{}'".format(json.dumps(record).replace("'", "")))
+    session.execute("INSERT INTO candidates.records JSON '{}'".format(json.dumps(record).replace("'", "")))
+    session.execute("INSERT INTO candidates.gender JSON '{}'".format(json.dumps(record).replace("'", "")))
+    session.execute("INSERT INTO candidates.blood_group JSON '{}'".format(json.dumps(record).replace("'", "")))
     print(json.dumps(record).replace("'", ""))

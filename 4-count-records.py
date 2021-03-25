@@ -17,7 +17,7 @@ sexes = ['M', 'F']
 
 print("Counting records ...")
 
-total = session.execute("SELECT COUNT(*) FROM customers.records").one()
+total = session.execute("SELECT COUNT(*) FROM candidates.records").one()
 t = PrettyTable(['Total'])
 t.add_row([total.system_count])
 print(t)
