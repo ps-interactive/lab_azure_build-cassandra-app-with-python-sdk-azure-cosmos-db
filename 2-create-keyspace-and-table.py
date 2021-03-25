@@ -24,4 +24,4 @@ print("\nCreating Table 'gender' with PRIMARY KEY (sex) ...")
 session.execute('CREATE TABLE IF NOT EXISTS customers.gender (id int, job text, company text, ssn text, residence text, blood_group text, username text, name text, sex text, address text, mail text, PRIMARY KEY ((sex), blood_group, residence))')
 
 print("\nCreating Table 'blood_groups' with PRIMARY KEY (blood_group) ...")
-session.execute('CREATE TABLE IF NOT EXISTS customers.blood_groups (id int, job text, company text, ssn text, residence text, blood_group text, username text, name text, sex text, address text, mail text, PRIMARY KEY ((blood_group), sex, residence))')
+session.execute('CREATE TABLE IF NOT EXISTS customers.blood_group (id int, job text, company text, ssn text, residence text, blood_group text, username text, name text, sex text, address text, mail text, PRIMARY KEY ((blood_group), sex, residence))')
