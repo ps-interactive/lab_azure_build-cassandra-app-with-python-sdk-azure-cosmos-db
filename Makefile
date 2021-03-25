@@ -1,7 +1,7 @@
 PYTHON       = $(shell which python)
 SHELL_FILES  = $(shell find . -type f -name \*.sh)
 PYTHON_FILES = $(shell find . -type f -name \*.py)
-
+APPLICATION  = $(shell find . -type f -name \*.py | sort | grep -v config)
 
 lint:
 	shellcheck $(SHELL_FILES)
@@ -23,3 +23,7 @@ data:
 	$(PYTHON) ./3-generate-data.py
 
 all: connection keyspace data
+
+application:
+	$(foreach app, $(APPLICATION), $(PYTHON) $(app))
+
