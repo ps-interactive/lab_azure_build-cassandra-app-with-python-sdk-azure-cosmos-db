@@ -16,7 +16,7 @@ session = cluster.connect()
 
 print("\nGenerating Data...")
 fake = Faker()
-for record_id in range(3000):
+for record_id in range(500):
     record = {'id': record_id}
     record.update(fake.profile(fields=keys))
     session.execute("INSERT INTO candidates.records JSON '{}'".format(json.dumps(record).replace("'", "")))
